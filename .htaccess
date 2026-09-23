@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Arahkan pengunjung langsung ke folder public
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ /public/$1 [L,QSA]
+</IfModule>
+
+# Keamanan Ekstra: Blokir akses ke file konfigurasi
+<FilesMatch "^\.env|composer\.json|package\.json">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
